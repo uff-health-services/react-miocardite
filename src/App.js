@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Create from './components/create.component';
 import Edit from './components/edit.component';
 import Index from './components/index.component';
+import DecisionTree from "./components/decisiontree.component";
 
 class App extends Component {
   render() {
@@ -21,6 +22,9 @@ class App extends Component {
                 <li className="nav-item">
                   <Link to={'/create'} className="nav-link">Create</Link>
                 </li>
+                  <li className="nav-item">
+                      <Link to={'/decisiontree'} className="nav-link">Decision tree</Link>
+                  </li>
                 <li className="nav-item">
                   <Link to={'/index'} className="nav-link">Index</Link>
                 </li>
@@ -29,6 +33,7 @@ class App extends Component {
           </nav>
           <Switch>
               <Route exact path='/create' component={ Create } />
+              <Route exact path='/decisiontree' component={ DecisionTree } />
               <Route path='/edit/:id' component={ Edit } />
               <Route path='/index' component={ Index } />
           </Switch>
