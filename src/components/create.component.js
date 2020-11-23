@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import cookie from 'react-cookie';
 
 export default class Create extends Component {
     constructor(props) {
@@ -18,6 +19,20 @@ export default class Create extends Component {
             peso: "",
             dataDeNascimento: "",
         }
+    }
+
+    componentDidMount() {
+        const auth = {
+            username: "foo",
+            password: "foo"
+        }
+        axios.post('http://localhost:8082/authenticate/', auth)
+            .then(response => {
+                cookie.save('token', response)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     onChangeNome(e) {

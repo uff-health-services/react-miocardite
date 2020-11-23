@@ -23,7 +23,7 @@ export default class DecisionTree extends Component {
             questionId: "q0",
             answers: [""]
         };
-        axios.post('http://localhost:8080/node', obj).then(response => {
+        axios.post('http://localhost:8083/node', obj).then(response => {
             this.setState({nextNode: response.data});
         })
             .catch(function (error) {
@@ -57,7 +57,7 @@ export default class DecisionTree extends Component {
             answers: this.state.answers
         };
 
-        axios.post('http://localhost:8080/node', obj).then(response => {
+        axios.post('http://localhost:8083/node', obj).then(response => {
             this.setState({nextNode: response.data});
         })
     }
