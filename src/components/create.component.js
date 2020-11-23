@@ -74,7 +74,7 @@ export default class Create extends Component {
     render() {
         return (
             <div style={{marginTop: 10}}>
-                <h3 align="center">adicionar paciente</h3>
+                <h3 align="center">Cadastro paciente</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Nome: </label>

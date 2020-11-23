@@ -13,7 +13,12 @@ export default class DecisionTree extends Component {
             treeName: "miocardite-escolar",
             questionId: "q0",
             answers: [""],
-            nextNode: []
+            nextNode: {
+                id: "",
+                type: "",
+                text: "",
+                possibleValues: []
+            }
         }
     }
 
@@ -24,7 +29,7 @@ export default class DecisionTree extends Component {
             answers: [""]
         };
         axios.post('http://localhost:8083/node', obj).then(response => {
-            this.setState({nextNode: response.data});
+            this.setState({...this.state, nextNode: response.data});
         })
             .catch(function (error) {
                 console.log(error);
@@ -52,41 +57,67 @@ export default class DecisionTree extends Component {
     onSubmit(e) {
         e.preventDefault();
         const obj = {
-            treeName : this.state.treeName,
+            treeName: this.state.treeName,
             questionId: this.state.nextNode.id,
             answers: this.state.answers
         };
 
         axios.post('http://localhost:8083/node', obj).then(response => {
-            this.setState({nextNode: response.data});
+            this.setState({...this.state, nextNode: response.data});
         })
     }
 
     render() {
+
         return (
             <div style={{marginTop: 10}}>
-                <h3 align="center">adicionar paciente</h3>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Questao: {this.state.nextNode.id}</label>
+                <h3 align="center">Árvore de decisão</h3>
+
+                {this.state.nextNode.type === "question"
+                    ? <div>
+                        <div className="form-group">
+                            <label>Questao: {this.state.nextNode.id}</label>
+                        </div>
+                        <div className="form-group">
+                            <label>Pergunta: {this.state.nextNode.text}</label>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label>Pergunta: {this.state.nextNode.text}</label>
+                    :<div>
+                        <div className="form-group">
+                            <label>Decisão: {this.state.nextNode.id}</label>
+                        </div>
+                        <div className="form-group">
+                            <label>Resposta: {this.state.nextNode.text}</label>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label>Answer: </label>
-                        <input type="text"
-                               className="form-control"
-                               value={this.state.answers}
-                               onChange={this.onChangeAnswer}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit"
-                               value="Resposta arvore"
-                               className="btn btn-primary"/>
-                    </div>
-                </form>
+                }
+
+
+                {this.state.nextNode.possibleValues &&
+                <div className="form-group">
+                    <label>Possíveis respostas: {this.state.nextNode.possibleValues.join()}</label>
+                </div>
+                }
+
+
+                {this.state.nextNode.type === "question" &&
+                    <form onSubmit={this.onSubmit}>
+
+                        <div className="form-group">
+                            <label>Answer: </label>
+                            <input type="text"
+                                   className="form-control"
+                                   value={this.state.answers}
+                                   onChange={this.onChangeAnswer}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input type="submit"
+                                   value="Resposta arvore"
+                                   className="btn btn-primary"/>
+                        </div>
+                    </form>
+                }
             </div>
         )
     }
