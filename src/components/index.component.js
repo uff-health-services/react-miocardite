@@ -9,7 +9,7 @@ export default class Index extends Component {
       this.state = {paciente: []};
     }
     componentDidMount(){
-      axios.get('http://3.238.134.235:8082/paciente')
+      axios.get('http://3.238.134.235:8082/paciente/')
         .then(response => {
             console.log(response);
           this.setState({ paciente: response.data });

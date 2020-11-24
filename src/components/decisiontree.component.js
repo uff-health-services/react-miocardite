@@ -30,7 +30,7 @@ export default class DecisionTree extends Component {
             answers: [""]
         };
         
-        axios.post("http://3.238.134.235:8083/node", obj).then(response => {
+        axios.post("http://3.238.134.235:8083/node/", obj).then(response => {
             this.setState({...this.state, nextNode: response.data});
         })
             .catch(function (error) {
@@ -65,7 +65,7 @@ export default class DecisionTree extends Component {
         };
 
 
-        axios.post("http://3.238.134.235:8083/node", obj).then(response => {
+        axios.post("http://3.238.134.235:8083/node/", obj).then(response => {
             this.setState({...this.state, nextNode: response.data});
         })
     }

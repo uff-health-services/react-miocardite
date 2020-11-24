@@ -59,7 +59,7 @@ export default class Create extends Component {
             peso: this.state.peso,
             dataDeNascimento: this.state.dataDeNascimento,
         };
-        axios.post('http://3.238.134.235:8082/paciente', obj)
+        axios.post('http://3.238.134.235:8082/paciente/', obj)
             .then(res => console.log(res.data));
 
         this.setState({

@@ -10,7 +10,7 @@ class TableRow extends Component {
     }
 
     delete() {
-        axios.delete('http://3.238.134.235:8082/paciente' + this.props.obj.id)
+        axios.delete('http://3.238.134.235:8082/paciente/' + this.props.obj.id)
             .then(console.log('Deleted'))
             .catch(err => console.log(err))
     }
