@@ -29,8 +29,9 @@ export default class DecisionTree extends Component {
             questionId: "q0",
             answers: [""]
         };
-        
-        axios.post("http://3.238.134.235:8083/node/", obj).then(response => {
+
+        axios.post("http://3.238.134.235:8084/tree/check", obj).then(response => {
+
             this.setState({...this.state, nextNode: response.data});
         })
             .catch(function (error) {
@@ -64,8 +65,8 @@ export default class DecisionTree extends Component {
             answers: this.state.answers
         };
 
+        axios.post("http://3.238.134.235:8084/tree/check", obj).then(response => {
 
-        axios.post("http://3.238.134.235:8083/node/", obj).then(response => {
             this.setState({...this.state, nextNode: response.data});
         })
     }
